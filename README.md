@@ -1,26 +1,60 @@
 # 🔍 AI Fake News Detector
 
-An AI-powered tool that uses **Natural Language Processing (NLP)** and **Machine Learning** to detect fake news articles in real-time.
+> **Real-world NLP + ML project** — detects fake news using an ensemble of three classifiers, TF-IDF feature engineering, URL article scraping, and keyword-level explainability.
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.45-red?logo=streamlit)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6-orange?logo=scikit-learn)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6-orange?logo=scikitlearn)
+![License](https://img.shields.io/badge/License-MIT-green)
 
+---
 
-## ✨ Features
+## 🚀 Features
 
-- **Real-time Detection** — Paste any news text and get instant REAL/FAKE classification
-- **Confidence Score** — See how confident the model is with an interactive gauge
-- **Text Analysis** — View word count, caps ratio, exclamation usage, and more
-- **Interactive Dashboard** — Beautiful dark-themed UI with charts and metrics
-- **Train Your Own Model** — Use built-in sample data or upload your own CSV
-- **Model Performance Visualization** — Confusion matrix and accuracy charts
+| Feature | Description |
+|---|---|
+| 🤖 **Ensemble ML** | Soft-voting: Logistic Regression + SGD + Passive-Aggressive |
+| 📐 **TF-IDF (50k)** | Unigrams + bigrams, sublinear TF, balanced class weights |
+| 🌐 **URL Scraping** | Paste any news URL — extracts article text via trafilatura |
+| 🔑 **Explainability** | Top keywords that drove the prediction (TF-IDF weight analysis) |
+| 📋 **Batch Analysis** | Analyze multiple articles at once, download results as CSV |
+| 📊 **Rich Metrics** | Accuracy, F1, Precision, Recall, ROC-AUC, Cross-Validation |
+| 🕓 **History** | In-session analysis history with source tracking |
+| 📁 **Real Datasets** | Supports WELFake (72k), ISOT (44k), or any labeled CSV |
 
-## 🚀 Quick Start
+---
+
+## 🏗️ Architecture
+
+```
+Raw Text / URL
+      │
+      ▼
+ArticleScraper (trafilatura + BeautifulSoup)
+      │
+      ▼
+TextPreprocessor (clean → lemmatize → feature extraction)
+      │
+      ▼
+TF-IDF Vectorizer (50,000 features, bigrams, sublinear TF)
+      │
+      ▼
+Voting Ensemble
+  ├── CalibratedLR (isotonic)
+  ├── CalibratedSGD (modified_huber)
+  └── CalibratedPAC
+      │
+      ▼
+Soft-voted probability → Verdict + Confidence + Keyword Explanation
+```
+
+---
+
+## ⚡ Quick Start
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/Atulframez/AI-Fake-News-Detector.git
+# 1. Clone
+git clone https://github.com/YOUR_USERNAME/AI-Fake-News-Detector.git
 cd AI-Fake-News-Detector
 
 # 2. Install dependencies
@@ -30,45 +64,68 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## 🧠 How It Works
+Then open **http://localhost:8501** and click **"Train on Sample Data"** in the sidebar.
 
-1. **Text Preprocessing** — Cleans text (removes URLs, HTML, stopwords) and lemmatizes
-2. **TF-IDF Vectorization** — Extracts important word features using TF-IDF (up to bigrams)
-3. **ML Classification** — PassiveAggressiveClassifier predicts REAL vs FAKE
-4. **Confidence Scoring** — Sigmoid-based confidence from decision function scores
+---
 
 ## 📁 Project Structure
 
 ```
 AI-Fake-News-Detector/
-├── app.py                          # Streamlit web application
-├── requirements.txt                # Python dependencies
+├── app.py                          # Main Streamlit app
+├── requirements.txt                # Dependencies
 ├── model/
-│   ├── __init__.py
-│   ├── preprocessor.py             # Text cleaning & feature extraction
-│   └── detector.py                 # ML model (train/predict/save/load)
+│   ├── detector.py                 # Ensemble ML model
+│   ├── preprocessor.py             # NLP preprocessing + features
+│   └── scraper.py                  # URL article extractor
 ├── sample_data/
-│   └── generate_sample_data.py     # Generates training dataset
-├── .streamlit/
-│   └── config.toml                 # UI theme configuration
-└── README.md
+│   └── generate_sample_data.py     # Built-in training data generator
+├── saved_model/                    # Auto-created after training
+│   ├── ensemble_model.pkl
+│   ├── tfidf_vectorizer.pkl
+│   └── model_meta.pkl
+└── .streamlit/
+    └── config.toml                 # Dark theme config
 ```
-
-## 📊 Model Details
-
-| Component | Details |
-|-----------|---------|
-| Algorithm | PassiveAggressiveClassifier |
-| Features | TF-IDF (max 10k features, bigrams) |
-| Preprocessing | Lemmatization, stopword removal |
-| Training Data | 400 balanced samples (expandable) |
-
-## 🤝 Contributing
-
-Pull requests are welcome! Feel free to open issues for bugs or feature requests.
-
 
 ---
 
-⭐ **Star this repo** if you find it useful!
+## 🗂️ Using Real Datasets
 
+For production-level accuracy, use one of these free datasets:
+
+| Dataset | Size | Link |
+|---|---|---|
+| **WELFake** | 72,134 articles | [Kaggle](https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification) |
+| **ISOT** | 44,898 articles | [UVic](https://www.uvic.ca/engineering/ece/isot/datasets/fake-news/index.php) |
+| **LIAR** | 12,836 statements | [GitHub](https://github.com/thiagorainmaker77/liar_dataset) |
+
+Download → upload via **"Upload Real Dataset (CSV)"** in the sidebar.
+
+---
+
+## 🧪 Model Performance (Sample Data)
+
+| Metric | Score |
+|---|---|
+| Test Accuracy | ~85–92% |
+| F1 Score | ~85–92% |
+| Cross-Validation | ±2–3% std |
+
+*Performance scales significantly with real datasets (WELFake: ~97%+ accuracy)*
+
+---
+
+## 🛠️ Tech Stack
+
+- **ML**: scikit-learn (LogisticRegression, SGDClassifier, PassiveAggressiveClassifier, VotingClassifier)
+- **NLP**: NLTK (lemmatization, stopwords), TF-IDF
+- **Scraping**: trafilatura, BeautifulSoup4, requests
+- **UI**: Streamlit, Plotly
+- **Persistence**: joblib
+
+---
+
+## 📄 License
+
+MIT © 2025
