@@ -1,9 +1,38 @@
+# Python
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environment
 .env
-saved_model/
-*.pkl
-.DS_Store
 venv/
 .venv/
+env/
+
+# Trained model files (large binary — not committed)
+saved_model/
+*.pkl
+*.joblib
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Streamlit cache
+.streamlit/secrets.toml
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
