@@ -5,7 +5,7 @@ An AI-powered tool that uses **Natural Language Processing (NLP)** and **Machine
 ![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.45-red?logo=streamlit)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6-orange?logo=scikit-learn)
-![License](https://img.shields.io/badge/License-MIT-green)
+
 
 ## ✨ Features
 
@@ -67,12 +67,8 @@ AI-Fake-News-Detector/
 
 Pull requests are welcome! Feel free to open issues for bugs or feature requests.
 
-## 📄 License
-
-This project is licensed under the MIT License.
 
 ---
 
 ⭐ **Star this repo** if you find it useful!
-# AI-Fake-News-Detector
-# AI-Fake-News-Detector
+
