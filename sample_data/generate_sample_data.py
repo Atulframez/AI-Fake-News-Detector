@@ -149,3 +149,4 @@ if __name__ == '__main__':
 
 # Dataset version: v1.2 — balanced 400-sample corpus (200 REAL + 200 FAKE)
 # Augmentation: prefix variation + sentence shuffle for diversity
+# Splits: 80% train / 20% test (stratified)
