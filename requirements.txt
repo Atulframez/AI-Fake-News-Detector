@@ -13,3 +13,5 @@ matplotlib==3.10.3
 lxml==6.1.0
 
 # Updated: 2026-05-02
+
+# trafilatura: article scraping
