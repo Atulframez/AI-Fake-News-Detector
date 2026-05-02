@@ -11,3 +11,5 @@ beautifulsoup4==4.12.3
 wordcloud==1.9.6
 matplotlib==3.10.3
 lxml==6.1.0
+
+# Updated: 2026-05-02
