@@ -1,1 +1,1 @@
-# AI Fake News Detector - Model Package
+# AI Fake News Detector — Model Package (ensemble v2)
