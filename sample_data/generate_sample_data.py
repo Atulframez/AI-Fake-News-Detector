@@ -146,3 +146,6 @@ def generate_dataset(output_path: str = None, num_augmented: int = 200):
 
 if __name__ == '__main__':
     generate_dataset()
+
+# Dataset version: v1.1 — balanced 400-sample corpus (200 REAL + 200 FAKE)
+# Augmentation: prefix variation + sentence shuffle for diversity
