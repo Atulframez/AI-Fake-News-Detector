@@ -60,6 +60,8 @@ class TextPreprocessor:
         self.stop_words = set(stopwords.words('english'))
         # Keep negations — they matter for sentiment
         self.stop_words -= {'no', 'not', 'nor', 'neither', 'never', 'none'}
+        # Also keep comparative/superlative — important for claim strength
+        self.stop_words -= {'more', 'most', 'less', 'least', 'very', 'too'}
 
     def clean_text(self, text: str) -> str:
         """
