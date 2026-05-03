@@ -39,6 +39,7 @@ SENSATIONAL_PATTERNS = [
     r'\bCOVER.?UP\b', r'\bWHISTLEBLOWER\b', r'\bHIDDEN TRUTH\b',
     r'\bWAKE UP\b', r'\bTHEY DON\'T WANT YOU\b', r'\bBIG PHARMA\b',
     r'\bDEEP STATE\b', r'\bFALSE FLAG\b', r'\bHOAX\b', r'\bPROPAGANDA\b',
+    r'\bALERT\b', r'\bMUST SEE\b', r'\bSHOCKING REVEAL\b', r'\bBREAKING NEWS\b',
 ]
 
 CREDIBLE_PATTERNS = [
@@ -47,6 +48,7 @@ CREDIBLE_PATTERNS = [
     r'\bgovernment\b', r'\buniversity\b', r'\bscientists\b',
     r'\bstatistics\b', r'\bdata shows\b', r'\breport(ed|s)?\b',
     r'\banalysis\b', r'\bexpert(s)?\b', r'\bconfirmed\b',
+    r'\bjournal\b', r'\binstitution\b', r'\bprofessor\b', r'\bclinical trial\b',
 ]
 
 
