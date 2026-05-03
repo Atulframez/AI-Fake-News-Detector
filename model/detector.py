@@ -213,6 +213,7 @@ class FakeNewsDetector:
 
         label = self.label_encoder.inverse_transform([y_enc])[0]
         is_fake = label == 'FAKE'
+        self._prediction_count += 1
 
         # Confidence: use the winning class probability
         confidence = round(float(probs[y_enc]) * 100, 2)
