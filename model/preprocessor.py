@@ -119,6 +119,8 @@ class TextPreprocessor:
         upper_chars = sum(1 for c in text if c.isupper())
         capital_ratio = upper_chars / max(char_count, 1)
         url_count = len(re.findall(r'https?://\S+|www\.\S+', text))
+        ellipsis_count = text.count('...')
+        quote_count = text.count('"') + text.count("'")
 
         text_upper = text.upper()
         sensational_hits = sum(
