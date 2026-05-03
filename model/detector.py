@@ -341,7 +341,12 @@ class FakeNewsDetector:
         return df[['text', 'label']].copy()
 
     def _normalize_labels(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Normalize various label formats to FAKE / REAL."""
+        """
+        Normalize various label formats to FAKE / REAL.
+
+        Handles: 0/1, true/false, real/fake, reliable/unreliable,
+        pants-fire, barely-true, half-true, mostly-true from LIAR dataset.
+        """
         mapping = {
             '0': 'FAKE', 0: 'FAKE', 'fake': 'FAKE', 'FALSE': 'FAKE',
             'false': 'FAKE', 'unreliable': 'FAKE', 'pants-fire': 'FAKE',
