@@ -88,6 +88,7 @@ class FakeNewsDetector:
         self.is_trained = False
         self.meta = {}
         self.feature_names = []
+        self._prediction_count = 0  # track total predictions made this session
 
     # ── Training ───────────────────────────────────────────────────────
 
