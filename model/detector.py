@@ -238,7 +238,16 @@ class FakeNewsDetector:
         }
 
     def predict_batch(self, texts: list[str]) -> list[dict]:
-        """Predict a list of texts. Returns list of result dicts."""
+        """
+        Predict a list of texts.
+
+        Args:
+            texts: list of raw news article strings.
+
+        Returns:
+            List of result dicts in the same order as input.
+            Empty or whitespace-only strings return an UNKNOWN verdict.
+        """
         return [self.predict(t) for t in texts]
 
     # ── Explainability ─────────────────────────────────────────────────
