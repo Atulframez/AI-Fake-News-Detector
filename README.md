@@ -207,4 +207,5 @@ Then open a **Pull Request** on GitHub. Ideas for contributions:
 
 MIT © 2026 [Atulframez](https://github.com/Atulframez)
 
-<!-- last reviewed: 2026-05-02 -->
+<!-- last reviewed: 2026-05-03 -->
+<!-- changelog: added sensational/credible patterns, scraper helpers, detector session counter, label_classes() -->
