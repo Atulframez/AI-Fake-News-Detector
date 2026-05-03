@@ -383,6 +383,10 @@ class FakeNewsDetector:
             self.feature_names = saved.get('feature_names', [])
         self.is_trained = True
 
+    def get_prediction_count(self) -> int:
+        """Return the number of predictions made this session."""
+        return self._prediction_count
+
     # ── Helpers ────────────────────────────────────────────────────────
 
     def _empty_result(self, text: str) -> dict:
