@@ -119,7 +119,11 @@ class ArticleScraper:
         return self._fail(url, domain, "Could not extract article text from this page.")
 
     def _bs4_extract(self, html: str) -> tuple[str, str]:
-        """Extract text from paragraphs using BeautifulSoup."""
+        """Extract text from paragraphs using BeautifulSoup.
+
+        Removes noisy tags (script, nav, footer, etc.) before collecting
+        paragraph text, then collapses whitespace.
+        """
         soup = BeautifulSoup(html, 'html.parser')
 
         # Remove noise
