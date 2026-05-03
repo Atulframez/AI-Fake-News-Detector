@@ -302,12 +302,18 @@ class FakeNewsDetector:
         return votes
 
     def _fake_idx(self) -> int:
+        """Index of the FAKE class in the label encoder."""
         classes = list(self.label_encoder.classes_)
         return classes.index('FAKE') if 'FAKE' in classes else 0
 
     def _real_idx(self) -> int:
+        """Index of the REAL class in the label encoder."""
         classes = list(self.label_encoder.classes_)
         return classes.index('REAL') if 'REAL' in classes else 1
+
+    def label_classes(self) -> list[str]:
+        """Return the list of recognized class labels."""
+        return list(self.label_encoder.classes_)
 
     # ── Data Loading ───────────────────────────────────────────────────
 
