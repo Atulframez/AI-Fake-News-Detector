@@ -91,7 +91,7 @@ class TextPreprocessor:
         tokens = [
             self.lemmatizer.lemmatize(word)
             for word in tokens
-            if word not in self.stop_words and len(word) > 2
+            if word not in self.stop_words and len(word) >= min_length
         ]
 
         return ' '.join(tokens)
@@ -150,7 +150,7 @@ class TextPreprocessor:
             'lexical_diversity': round(unique_ratio, 4),
         }
 
-    def get_top_keywords(self, text: str, top_n: int = 10) -> list[tuple[str, float]]:
+    def get_top_keywords(self, text: str, top_n: int = 10, min_length: int = 3) -> list[tuple[str, float]]:
         """
         Return the top N significant keywords from the text,
         scored by inverse-stopword-frequency heuristic.
