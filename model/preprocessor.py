@@ -181,3 +181,11 @@ class TextPreprocessor:
             'credibility_score': 0,
             'lexical_diversity': 0,
         }
+
+
+# ── Utility ────────────────────────────────────────────────────────────
+
+def count_sensational_hits(text: str) -> int:
+    """Return the number of sensational pattern matches in text (case-insensitive)."""
+    text_upper = text.upper()
+    return sum(1 for p in SENSATIONAL_PATTERNS if __import__('re').search(p, text_upper))
