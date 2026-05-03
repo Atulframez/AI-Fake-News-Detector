@@ -158,10 +158,14 @@ class ArticleScraper:
     def _extract_domain(self, url: str) -> str:
         try:
             parsed = urlparse(url)
-            domain = parsed.netloc.replace('www.', '')
-            return domain
+            domain = parsed.netloc.replace('www.', '').lower()
+            return domain or url
         except Exception:
             return url
+
+    def is_supported_scheme(self, url: str) -> bool:
+        """Return True only for http/https URLs."""
+        return url.lower().startswith(('http://', 'https://'))
 
     def _fail(self, url: str, domain: str, error: str) -> dict:
         return {
