@@ -55,6 +55,7 @@ class FakeNewsDetector:
             ngram_range=(1, 2),
             sublinear_tf=True,       # log-scaled TF for more balanced weighting
             strip_accents='unicode',
+            analyzer='word',         # word-level tokens (not char n-grams)
         )
 
         # Individual calibrated classifiers
