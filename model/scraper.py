@@ -33,6 +33,7 @@ HEADERS = {
 }
 
 TIMEOUT = 15  # seconds
+MAX_TEXT_LENGTH = 50_000  # chars — guard against giant pages
 
 
 class ArticleScraper:
