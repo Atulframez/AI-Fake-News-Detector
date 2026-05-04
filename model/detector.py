@@ -315,6 +315,25 @@ class FakeNewsDetector:
         """Return the list of recognized class labels."""
         return list(self.label_encoder.classes_)
 
+    def is_model_loaded(self) -> bool:
+        """Return True if the model is trained or loaded and ready for inference."""
+        return self.is_trained
+
+    def model_summary(self) -> dict:
+        """
+        Return a brief summary of the current model state.
+
+        Useful for displaying model info in a UI or API response.
+        """
+        return {
+            'is_loaded': self.is_trained,
+            'classes': self.label_classes() if self.is_trained else [],
+            'vocab_size': len(self.feature_names),
+            'total_predictions': self._prediction_count,
+            'test_accuracy': self.meta.get('test_accuracy'),
+            'f1_score': self.meta.get('f1_score'),
+        }
+
     # ── Data Loading ───────────────────────────────────────────────────
 
     def _load_data(self, data_path, df) -> pd.DataFrame:
