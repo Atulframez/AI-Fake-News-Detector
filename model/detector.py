@@ -399,6 +399,10 @@ class FakeNewsDetector:
         """Return the number of predictions made this session."""
         return self._prediction_count
 
+    def reset_prediction_count(self) -> None:
+        """Reset the session prediction counter back to zero."""
+        self._prediction_count = 0
+
     # ── Helpers ────────────────────────────────────────────────────────
 
     def _empty_result(self, text: str) -> dict:
