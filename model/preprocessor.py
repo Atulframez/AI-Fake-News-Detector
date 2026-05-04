@@ -170,6 +170,17 @@ class TextPreprocessor:
         scored.sort(key=lambda x: x[1], reverse=True)
         return scored[:top_n]
 
+    def text_stats_summary(self, text: str) -> str:
+        """Return a human-readable one-line summary of key text statistics."""
+        f = self.extract_features(text)
+        return (
+            f"Words: {f['word_count']} | "
+            f"Sentences: {f['sentence_count']} | "
+            f"CAPS ratio: {f['capital_ratio']:.1%} | "
+            f"Sensational hits: {f['sensational_score']} | "
+            f"Credibility hits: {f['credibility_score']}"
+        )
+
     def _empty_features(self) -> dict:
         return {
             'char_count': 0,
