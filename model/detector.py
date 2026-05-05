@@ -316,6 +316,23 @@ class FakeNewsDetector:
         """Return the list of recognized class labels."""
         return list(self.label_encoder.classes_)
 
+    def top_fake_keywords(self, text: str, top_n: int = 5) -> list:
+        """
+        Return up to top_n keywords from text that match known
+        sensational patterns — useful for quick explainability display.
+        """
+        import re
+        from .preprocessor import SENSATIONAL_PATTERNS
+        text_upper = text.upper()
+        matched = []
+        for pattern in SENSATIONAL_PATTERNS:
+            m = re.search(pattern, text_upper)
+            if m:
+                matched.append(m.group(0).title())
+            if len(matched) >= top_n:
+                break
+        return matched
+
     def verdict_emoji(self, verdict: str) -> str:
         """Return an emoji representing the verdict for display purposes."""
         return {'FAKE': '🔴', 'REAL': '🟢'}.get(verdict.upper(), '⚪')
