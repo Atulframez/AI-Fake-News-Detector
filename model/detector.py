@@ -315,6 +315,27 @@ class FakeNewsDetector:
         """Return the list of recognized class labels."""
         return list(self.label_encoder.classes_)
 
+    def confidence_label(self, confidence: float) -> str:
+        """
+        Convert a numeric confidence percentage to a human-readable label.
+
+        Ranges:
+            >= 90  → 'Very High'
+            >= 75  → 'High'
+            >= 60  → 'Moderate'
+            >= 45  → 'Low'
+            <  45  → 'Very Low'
+        """
+        if confidence >= 90:
+            return 'Very High'
+        elif confidence >= 75:
+            return 'High'
+        elif confidence >= 60:
+            return 'Moderate'
+        elif confidence >= 45:
+            return 'Low'
+        return 'Very Low'
+
     def is_model_loaded(self) -> bool:
         """Return True if the model is trained or loaded and ready for inference."""
         return self.is_trained
