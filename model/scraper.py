@@ -121,6 +121,16 @@ class ArticleScraper:
 
         return self._fail(url, domain, "Could not extract article text from this page.")
 
+    def scrape_success_rate(self, results: list) -> float:
+        """
+        Given a list of results from scrape_many(), return the
+        fraction of URLs that were successfully scraped (0.0–1.0).
+        """
+        if not results:
+            return 0.0
+        successes = sum(1 for r in results if r.get('success'))
+        return round(successes / len(results), 4)
+
     def scrape_many(self, urls: list) -> list:
         """
         Scrape multiple URLs and return a list of result dicts.
