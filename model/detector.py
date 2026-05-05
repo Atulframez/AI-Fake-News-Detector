@@ -232,6 +232,7 @@ class FakeNewsDetector:
             'verdict': label,
             'is_fake': is_fake,
             'confidence': confidence,
+            'confidence_label': self.confidence_label(confidence),
             'fake_prob': round(float(probs[self._fake_idx()]) * 100, 2),
             'real_prob': round(float(probs[self._real_idx()]) * 100, 2),
             'keywords': keywords,
