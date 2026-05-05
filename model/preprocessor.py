@@ -170,6 +170,12 @@ class TextPreprocessor:
         scored.sort(key=lambda x: x[1], reverse=True)
         return scored[:top_n]
 
+    def word_count(self, text: str) -> int:
+        """Return the total number of whitespace-separated words in the text."""
+        if not isinstance(text, str) or not text.strip():
+            return 0
+        return len(text.split())
+
     def sentence_count(self, text: str) -> int:
         """Return the number of sentences detected in the text."""
         import re
