@@ -170,6 +170,17 @@ class TextPreprocessor:
         scored.sort(key=lambda x: x[1], reverse=True)
         return scored[:top_n]
 
+    def is_likely_fake(self, text: str, threshold: int = 3) -> bool:
+        """
+        Heuristic quick-check: return True if the text contains
+        >= `threshold` sensational pattern matches.
+        Useful as a fast pre-filter before full ML inference.
+        """
+        text_upper = text.upper()
+        import re
+        hits = sum(1 for p in SENSATIONAL_PATTERNS if re.search(p, text_upper))
+        return hits >= threshold
+
     def text_stats_summary(self, text: str) -> str:
         """Return a human-readable one-line summary of key text statistics."""
         f = self.extract_features(text)
