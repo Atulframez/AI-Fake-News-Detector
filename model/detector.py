@@ -316,6 +316,10 @@ class FakeNewsDetector:
         """Return the list of recognized class labels."""
         return list(self.label_encoder.classes_)
 
+    def verdict_emoji(self, verdict: str) -> str:
+        """Return an emoji representing the verdict for display purposes."""
+        return {'FAKE': '🔴', 'REAL': '🟢'}.get(verdict.upper(), '⚪')
+
     def confidence_label(self, confidence: float) -> str:
         """
         Convert a numeric confidence percentage to a human-readable label.
