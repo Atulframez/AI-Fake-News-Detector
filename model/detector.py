@@ -187,6 +187,8 @@ class FakeNewsDetector:
             'labels': labels_decoded,
         }
 
+        from datetime import datetime, timezone
+        self.meta['trained_at'] = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
         self._save()
         print(f"✅ Training complete! Test accuracy: {test_acc*100:.2f}%")
         return self.meta
