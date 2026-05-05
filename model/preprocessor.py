@@ -170,6 +170,19 @@ class TextPreprocessor:
         scored.sort(key=lambda x: x[1], reverse=True)
         return scored[:top_n]
 
+    def strip_sensational_prefix(self, text: str) -> str:
+        """
+        Remove leading sensational clickbait prefixes like
+        'BREAKING:', 'ALERT:', 'EXPOSED:' etc. from the text.
+        Helps normalise headlines before feature extraction.
+        """
+        import re
+        return re.sub(
+            r'^(?:BREAKING|ALERT|EXPOSED|BOMBSHELL|SHOCKING|MUST READ|MUST SEE'
+            r'|URGENT|BREAKING NEWS)[:\s!-]+',
+            '', text, flags=re.IGNORECASE
+        ).strip()
+
     def is_likely_fake(self, text: str, threshold: int = 3) -> bool:
         """
         Heuristic quick-check: return True if the text contains
