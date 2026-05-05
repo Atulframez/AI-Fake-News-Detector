@@ -170,6 +170,14 @@ class TextPreprocessor:
         scored.sort(key=lambda x: x[1], reverse=True)
         return scored[:top_n]
 
+    def sentence_count(self, text: str) -> int:
+        """Return the number of sentences detected in the text."""
+        import re
+        if not isinstance(text, str) or not text.strip():
+            return 0
+        sentences = re.split(r'[.!?]+', text)
+        return max(len([s for s in sentences if s.strip()]), 1)
+
     def credibility_ratio(self, text: str) -> float:
         """
         Compute a credibility ratio between 0.0 and 1.0.
