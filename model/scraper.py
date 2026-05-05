@@ -121,6 +121,19 @@ class ArticleScraper:
 
         return self._fail(url, domain, "Could not extract article text from this page.")
 
+    def scrape_many(self, urls: list) -> list:
+        """
+        Scrape multiple URLs and return a list of result dicts.
+
+        Args:
+            urls: list of URL strings to scrape.
+
+        Returns:
+            List of dicts from scrape(), in the same order as input.
+            Failed URLs will have success=False in their result dict.
+        """
+        return [self.scrape(url) for url in urls]
+
     def _bs4_extract(self, html: str) -> tuple[str, str]:
         """Extract text from paragraphs using BeautifulSoup.
 
