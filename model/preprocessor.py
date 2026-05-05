@@ -170,6 +170,20 @@ class TextPreprocessor:
         scored.sort(key=lambda x: x[1], reverse=True)
         return scored[:top_n]
 
+    def credibility_ratio(self, text: str) -> float:
+        """
+        Compute a credibility ratio between 0.0 and 1.0.
+
+        ratio = credible_hits / (credible_hits + sensational_hits + 1)
+
+        Higher values indicate more credible writing style.
+        """
+        import re
+        text_upper = text.upper()
+        s_hits = sum(1 for p in SENSATIONAL_PATTERNS if re.search(p, text_upper))
+        c_hits = sum(1 for p in CREDIBLE_PATTERNS if re.search(p, text, re.IGNORECASE))
+        return round(c_hits / (c_hits + s_hits + 1), 4)
+
     def strip_sensational_prefix(self, text: str) -> str:
         """
         Remove leading sensational clickbait prefixes like
