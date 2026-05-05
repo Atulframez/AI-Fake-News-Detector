@@ -121,6 +121,14 @@ class ArticleScraper:
 
         return self._fail(url, domain, "Could not extract article text from this page.")
 
+    def format_result_summary(self, result: dict) -> str:
+        """Return a one-line human-readable summary of a scrape result."""
+        if result.get('success'):
+            return (
+                f"✅ [{result['method']}] {result['domain']} — "                f"{result.get('word_count', 0)} words scraped"
+            )
+        return f"❌ {result.get('domain', 'unknown')} — {result.get('error', 'failed')}"
+
     def scrape_success_rate(self, results: list) -> float:
         """
         Given a list of results from scrape_many(), return the
