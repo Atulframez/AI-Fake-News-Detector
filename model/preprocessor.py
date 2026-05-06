@@ -148,6 +148,8 @@ class TextPreprocessor:
             'sensational_score': sensational_hits,
             'credibility_score': credible_hits,
             'lexical_diversity': round(unique_ratio, 4),
+            'ellipsis_count': ellipsis_count,
+            'quote_count': quote_count,
         }
 
     def get_top_keywords(self, text: str, top_n: int = 10, min_length: int = 3) -> list[tuple[str, float]]:
