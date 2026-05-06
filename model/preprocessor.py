@@ -236,6 +236,7 @@ class TextPreprocessor:
         )
 
     def _empty_features(self) -> dict:
+        """Return a zeroed feature dict matching the extract_features() schema."""
         return {
             'char_count': 0,
             'word_count': 0,
@@ -249,6 +250,8 @@ class TextPreprocessor:
             'sensational_score': 0,
             'credibility_score': 0,
             'lexical_diversity': 0,
+            'ellipsis_count': 0,
+            'quote_count': 0,
         }
 
 
