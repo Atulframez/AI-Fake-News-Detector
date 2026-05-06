@@ -335,6 +335,31 @@ class FakeNewsDetector:
                 break
         return matched
 
+    def risk_level(self, result: dict) -> str:
+        """
+        Derive a risk level string from a predict() result dict.
+
+        Combines verdict and confidence to give a UX-friendly risk label:
+            FAKE + Very High  → 'Critical'
+            FAKE + High       → 'High Risk'
+            FAKE + Moderate   → 'Moderate Risk'
+            FAKE + Low/VLow   → 'Uncertain'
+            REAL + *          → 'Low Risk'
+            UNKNOWN           → 'Undetected'
+        """
+        verdict = result.get('verdict', 'UNKNOWN')
+        conf_label = result.get('confidence_label', '')
+        if verdict == 'UNKNOWN':
+            return 'Undetected'
+        if verdict == 'REAL':
+            return 'Low Risk'
+        risk_map = {
+            'Very High': 'Critical',
+            'High': 'High Risk',
+            'Moderate': 'Moderate Risk',
+        }
+        return risk_map.get(conf_label, 'Uncertain')
+
     def verdict_emoji(self, verdict: str) -> str:
         """Return an emoji representing the verdict for display purposes."""
         return {'FAKE': '🔴', 'REAL': '🟢'}.get(verdict.upper(), '⚪')
