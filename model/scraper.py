@@ -35,8 +35,10 @@ HEADERS = {
     'Cache-Control': 'no-cache',
 }
 
-TIMEOUT = 15  # seconds
+TIMEOUT = 15         # seconds per request
 MAX_TEXT_LENGTH = 50_000  # chars — guard against giant pages
+MAX_RETRIES = 2      # number of retry attempts on transient network errors
+MIN_ARTICLE_CHARS = 100  # minimum extracted text length to consider a scrape successful
 
 
 class ArticleScraper:
